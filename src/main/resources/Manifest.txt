@@ -1,0 +1,1 @@
+Class-Path:log4j-api-2.11.2.jar log4j-core-2.11.2.jar
