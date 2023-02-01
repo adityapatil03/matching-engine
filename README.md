@@ -4,11 +4,11 @@ The project can be built with maven and can be run as a simple Java executable j
 
 There are 2 options to run the project as follows :-
 
-### java -jar orderbook-1.0-SNAPSHOT.jar 05-orders-SellResting-BuyAggressive.txt
+### java -jar orderbook-1.0-SNAPSHOT.jar *05-orders-SellResting-BuyAggressive.txt
 
 Or
 
-### java -jar orderbook-1.0-SNAPSHOT.jar 05-orders-SellResting-BuyAggressive.txt  async
+### java -jar orderbook-1.0-SNAPSHOT.jar *05-orders-SellResting-BuyAggressive.txt  **async
 (*Input File as first argument and async as optional 2nd argument)
 
 The async (optional) argument in the latter command runs the matching engine in asynchronous mode where Trades are emitted (printed) asynchronously
@@ -25,4 +25,5 @@ and so does not interrupt order matching and processing resulting in a better ex
  **TreeSet** has been used to store the buy / sell orders.
  TreeSet is based on the **binary search tree** and has **time complexity of O(log n)** to add or remove the elements while keeping the orders sorted as per **price time priority**.
 
-## Tests : JUnit tests and validations are part of the deliverable. src/test/input contains various test files I have composed and tested. 
+## Tests 
+ JUnit tests and validations are part of the deliverable. **src/test/input** contains various test files I have composed and tested. 
