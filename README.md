@@ -19,7 +19,7 @@ I strongly suggest to also use and try async execution option in addition.
 Order Matching Class : The class LimitOrderBook.java contains main business logic for the order matching and processing.
 
 ## Performance benchmark 
- The matching engine currently processes around **300,000 orders per second.
+ The matching engine currently processes around **300,000 orders per second**.
 
 Bids / Asks Data Structure - I have used TreeSet in java to store the buy / sell orders.
 TreeSet is based on the binary search tree and has time complexity of O(log n) to add or remove the elements while keeping the orders sorted as per price time priority.
