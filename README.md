@@ -18,13 +18,14 @@ Or
 The **async (optional) argument in the latter command runs the matching engine in asynchronous mode where Trades are emitted (printed) asynchronously
 and so does not interrupt order matching and processing resulting in a better execution time. Here a new Thread would be running as TradeAsyncHandler**.
 
-###### **_I strongly suggest to additionally try and use async execution option._** 
+##### **_I strongly suggest to additionally try and use async execution option._** 
 
 ## Order Matching Class 
  The class **LimitOrderBook.java** contains main business logic for the order matching and processing.
+ 
 
 ## Performance benchmark 
- The matching engine currently processes around **300,000 orders per second**.
+ The matching engine currently processes around **300,000 orders per second** in the **async** mode.
 
 ## Bids / Asks Data Structure 
  **TreeSet** has been used to store the buy / sell orders.
