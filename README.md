@@ -8,7 +8,7 @@ There are 2 options to run the project as follows :-
 Or
 ### java -jar orderbook-1.0-SNAPSHOT.jar <arg1 - inputFile.txt> <optional arg2 - async>
  
-##### Examples : 
+#### Examples : 
  java -jar orderbook-1.0-SNAPSHOT.jar *05-orders-SellResting-BuyAggressive.txt*
  
  or
@@ -18,7 +18,7 @@ Or
 The **async (optional) argument in the latter command runs the matching engine in asynchronous mode where Trades are emitted (printed) asynchronously
 and so does not interrupt order matching and processing resulting in a better execution time. Here a new Thread would be running as TradeAsyncHandler**.
 
-##### **_I strongly suggest to additionally try and use async execution option._** 
+#### **_I strongly suggest to additionally try and use async execution option._** 
 
 ## Order Matching Class 
  The class **LimitOrderBook.java** contains main business logic for the order matching and processing.
