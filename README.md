@@ -17,12 +17,13 @@ Or
  
 (*Input File as first argument and async as optional 2nd argument*)
 
-The **async (optional)** argument in the latter command runs the matching engine in asynchronous mode where Trades are emitted (printed) asynchronously
-and so does not interrupt order matching and processing resulting in a better execution time. Here a new Thread would be running as TradeAsyncHandler.
+The **async (optional)** argument in the latter command runs the **matching engine in asynchronous mode where Trades are emitted (printed) asynchronously
+and so does not interrupt order matching and processing resulting in a better execution time. Here a new Thread would be running as TradeAsyncHandler**.
 
 **I strongly suggest to also use and try async execution option in addition.** 
 
-## Order Matching Class : The class LimitOrderBook.java contains main business logic for the order matching and processing.
+## Order Matching Class 
+ The class **LimitOrderBook.java** contains main business logic for the order matching and processing.
 
 ## Performance benchmark 
  The matching engine currently processes around **300,000 orders per second**.
