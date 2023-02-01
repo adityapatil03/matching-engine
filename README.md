@@ -4,11 +4,14 @@ The project can be built with maven and can be run as a simple Java executable j
 
 There are 2 options to run the project as follows :-
 
-### java -jar orderbook-1.0-SNAPSHOT.jar *05-orders-SellResting-BuyAggressive.txt
-
+### java -jar orderbook-1.0-SNAPSHOT.jar <arg1 - input file> 
 Or
-
-### java -jar orderbook-1.0-SNAPSHOT.jar *05-orders-SellResting-BuyAggressive.txt  **async
+### java -jar orderbook-1.0-SNAPSHOT.jar <arg1 - inputFile.txt> <arg2 - async>
+ 
+** Examples : 
+ java -jar orderbook-1.0-SNAPSHOT.jar *05-orders-SellResting-BuyAggressive.txt
+ or
+ java -jar orderbook-1.0-SNAPSHOT.jar *05-orders-SellResting-BuyAggressive.txt **async
 (*Input File as first argument and async as optional 2nd argument)
 
 The async (optional) argument in the latter command runs the matching engine in asynchronous mode where Trades are emitted (printed) asynchronously
