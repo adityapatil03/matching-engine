@@ -14,13 +14,11 @@ Or
  or
  
  java -jar orderbook-1.0-SNAPSHOT.jar *05-orders-SellResting-BuyAggressive.txt* **async**
- 
-(*Input File as first argument and async as optional 2nd argument*)
 
-The **async (optional)** argument in the latter command runs the **matching engine in asynchronous mode where Trades are emitted (printed) asynchronously
+The **async (optional) argument in the latter command runs the matching engine in asynchronous mode where Trades are emitted (printed) asynchronously
 and so does not interrupt order matching and processing resulting in a better execution time. Here a new Thread would be running as TradeAsyncHandler**.
 
-**I strongly suggest to also use and try async execution option in addition.** 
+###### **_I strongly suggest to additionally try and use async execution option._** 
 
 ## Order Matching Class 
  The class **LimitOrderBook.java** contains main business logic for the order matching and processing.
