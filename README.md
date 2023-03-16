@@ -6,6 +6,7 @@
 ## Bids / Asks Data Structure 
  **TreeSet** has been used to store the buy / sell orders.
  TreeSet is based on the **binary search tree** and has **time complexity of O(log n)** to add or remove the elements while keeping the orders sorted as per **price time priority**.
+ **BlockingQueue** has been used for producer-consumer pattern for emitting trades.
  
  
 ## Build - Run
