@@ -1,5 +1,15 @@
 # Matching Engine - Order Book
 
+## Performance benchmark 
+ The matching engine currently processes around **300,000 orders per second** in the **async** mode.
+
+## Bids / Asks Data Structure 
+ **TreeSet** has been used to store the buy / sell orders.
+ TreeSet is based on the **binary search tree** and has **time complexity of O(log n)** to add or remove the elements while keeping the orders sorted as per **price time priority**.
+ 
+ 
+## Build - Run
+
 The project can be built with maven and can be run as a simple Java executable jar with an order file as input.
 
 There are 2 options to run the project as follows :-
@@ -23,13 +33,6 @@ and so does not interrupt order matching and processing resulting in a better ex
 ## Order Matching Class 
  The class **LimitOrderBook.java** contains main business logic for the order matching and processing.
  
-
-## Performance benchmark 
- The matching engine currently processes around **300,000 orders per second** in the **async** mode.
-
-## Bids / Asks Data Structure 
- **TreeSet** has been used to store the buy / sell orders.
- TreeSet is based on the **binary search tree** and has **time complexity of O(log n)** to add or remove the elements while keeping the orders sorted as per **price time priority**.
 
 ## Tests and Test Files
  JUnit tests and validations are also included. **src/test/input** contains various test files I have composed and tested. 
