@@ -39,3 +39,28 @@ and so does not interrupt order matching and processing resulting in a better ex
 ## Tests and Test Files
  **src/test/input** contains test files with various cases which I have composed and tested. 
  JUnit tests and validations are also included. 
+ 
+
+## Input file format
+format  :- orderId,side,price,quantity
+
+example .txt :-
+
+1001,B,99,10000
+
+1002,S,100,5000
+
+Please check the sample file inside /src/test/input
+
+## Output file format
+Trades and final Order Book status would be written to orderbook.log inside current directory
+
+Trade format :- 
+
+trade aggressiveOrderId,restingOrderId,matchingPrice,quantity
+
+Order Book format :- 
+
+Buys.......................Sells
+
+Quantity  Price  |  Price  Quantity
