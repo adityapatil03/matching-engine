@@ -1,7 +1,7 @@
 # Matching Engine - Order Book
 
 ## Performance benchmark 
- The matching engine currently processes around **300,000 orders per second** in the **async** mode.
+ The matching engine currently processes around **600,000 orders per second** in the **async** mode.
 
 ## Bids / Asks Data Structure 
  **TreeSet** has been used to store the buy / sell orders.
@@ -15,16 +15,17 @@ The project can be built with maven and can be run as a simple Java executable j
 
 There are 2 options to run the project as follows :-
 
-### java -jar orderbook-1.0-SNAPSHOT.jar <arg1 - input file> 
-Or
 ### java -jar orderbook-1.0-SNAPSHOT.jar <arg1 - inputFile.txt> <optional arg2 - async>
+Or
+### java -jar orderbook-1.0-SNAPSHOT.jar <arg1 - input file> 
  
 #### Examples : 
- java -jar orderbook-1.0-SNAPSHOT.jar *05-orders-SellResting-BuyAggressive.txt*
+ java -jar orderbook-1.0-SNAPSHOT.jar *05-orders-SellResting-BuyAggressive.txt* **async**
  
  or
  
- java -jar orderbook-1.0-SNAPSHOT.jar *05-orders-SellResting-BuyAggressive.txt* **async**
+ java -jar orderbook-1.0-SNAPSHOT.jar *05-orders-SellResting-BuyAggressive.txt*
+
 
 **The async (optional) argument in the latter command runs the matching engine in asynchronous mode where Trades are emitted (printed) asynchronously
 and so does not interrupt order matching and processing resulting in a better execution time. Here a new Thread would be running as TradeAsyncHandler**.
@@ -36,4 +37,5 @@ and so does not interrupt order matching and processing resulting in a better ex
  
 
 ## Tests and Test Files
- JUnit tests and validations are also included. **src/test/input** contains various test files I have composed and tested. 
+ **src/test/input** contains test files with various cases which I have composed and tested. 
+ JUnit tests and validations are also included. 
