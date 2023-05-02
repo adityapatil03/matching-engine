@@ -4,14 +4,17 @@ package org.exchange.orderbook;
 import org.exchange.model.Order;
 import org.exchange.model.Side;
 import org.exchange.model.Trade;
+import org.exchange.util.OrderBookLogger;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
+import java.util.logging.Logger;
 
 public class LimitOrderBook implements OrderBook {
 
+    private static final Logger logger = OrderBookLogger.getLogger();
     private static final OrderBook INSTANCE = new LimitOrderBook();
 
     public static OrderBook getInstance() {
@@ -25,18 +28,22 @@ public class LimitOrderBook implements OrderBook {
      * TreeSet has time complexity of O(log(n))
      * to add or remove elements while keeping
      * the list sorted
+     * <p>
+     * -- java.util.concurrent.ConcurrentSkipListSet -- can be used in place of TreeSet
+     * if multithreading is implemented here
      */
     private final TreeSet<Order> bids = new TreeSet<>(new OrderComparator());
     private final TreeSet<Order> asks = new TreeSet<>(new OrderComparator());
 
-    /** matchAndProcess(Order order)
-     *  matches bids and asks as per price time priority
-     *  against incoming aggressive order
-     *  Params: Order -- Incoming Limit Order,
-     *          async -- for Asynchronous handling of Trades
-     * */
+    /**
+     * matchAndProcess(Order order)
+     * matches bids and asks as per price time priority
+     * against incoming aggressive order
+     * Params: Order -- Incoming Limit Order,
+     * async -- for Asynchronous handling of Trades
+     */
     @Override
-    public synchronized void matchAndProcess(Order inOrder, boolean async) {
+    public void matchAndProcess(Order inOrder, boolean async) {
 
         boolean isBuy = Side.Buy.equals(inOrder.getSide());
 
@@ -51,16 +58,9 @@ public class LimitOrderBook implements OrderBook {
             restingOrder.setVolume(restingOrder.getVolume() - tradeVolume);
             inOrder.setVolume(inOrder.getVolume() - tradeVolume);
             Trade trade = new Trade(inOrder.getOrderId(), restingOrder.getOrderId(), restingOrder.getPrice(), tradeVolume);
-            trades.add(trade);
 
-            if (!async) {
-                // Emit to System.out Synchronously, affects total execution time
-                System.out.println(trade);
-            }
-            else {
-                // Emit to TradeAsyncHandler Asynchronously, improves total execution time
-                broadcastTrade(trade);
-            }
+            // Handle trade
+            broadcastTrade(trade, async);
 
             if (restingOrder.getVolume() == 0) {
                 if (isBuy)
@@ -87,9 +87,18 @@ public class LimitOrderBook implements OrderBook {
     }
 
     @Override
-    public void broadcastTrade(Trade trade) {
-        // Emit to TradeAsyncHandler Asynchronously, improves total execution time
-        tradeQueue.add(trade);
+    public void broadcastTrade(Trade trade, boolean async) {
+
+        trades.add(trade);
+
+        if (!async) {
+            // Emit to System.out Synchronously, affects total execution time
+            logger.info(trade.toString());
+        } else {
+            // Emit to TradeAsyncHandler Asynchronously, improves total execution time
+            tradeQueue.add(trade);
+        }
+
     }
 
     @Override
@@ -104,7 +113,7 @@ public class LimitOrderBook implements OrderBook {
             return;
         }
 
-        System.out.println("\n" + String.format("%-21s", "Buyers") + "Sellers\n");
+        logger.info("\n" + String.format("%-21s", "Buys") + "Sells\n");
 
         while (buyIt.hasNext() || sellIt.hasNext()) {
             String buy = "";
@@ -120,7 +129,7 @@ public class LimitOrderBook implements OrderBook {
                 sell = String.format("%1$6s", priceFormatter.format(sellOrder.getPrice())) + " " + String.format("%1$11s", volFormatter.format(sellOrder.getVolume()));
             }
 
-            System.out.println((buy.isBlank() ? String.format("%18s", "") : buy) + " | " + sell);
+            logger.info((buy.isBlank() ? String.format("%18s", "") : buy) + " | " + sell);
         }
 
     }
@@ -146,7 +155,7 @@ public class LimitOrderBook implements OrderBook {
     }
 
     @Override
-    public synchronized void clearOrderBook() {
+    public void clearOrderBook() {
         this.bids.clear();
         this.asks.clear();
         this.trades.clear();

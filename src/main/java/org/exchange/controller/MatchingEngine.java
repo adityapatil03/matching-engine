@@ -1,11 +1,13 @@
 package org.exchange.controller;
 
+import org.exchange.util.OrderBookLogger;
+
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
 public class MatchingEngine {
 
-    private static final Logger logger = Logger.getLogger(MatchingEngine.class.getName());
+    private static final Logger logger = OrderBookLogger.getLogger();
 
     public static void main(String[] args) {
 
@@ -25,7 +27,6 @@ public class MatchingEngine {
         orderBookHandler.handleOrders(orderInput, async);
 
         // Orders can not be modified by further input, fresh order book for next execution
-        if (!async)
-            orderBookHandler.clearOrderBook();
+        orderBookHandler.clearOrderBook();
     }
 }

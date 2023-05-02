@@ -81,20 +81,6 @@ public class OrderBookHandlerTest {
     }
 
     @Test
-    @DisplayName("Performance load - 5K orders")
-    void performance_load_5K_orders() {
-        Path file = testResource.resolve("09-orders-performance5000.txt");
-        orderBookHandler.handleOrders(file);
-    }
-
-    @Test
-    @DisplayName("Performance load - 100K orders")
-    void performance_load_100K_orders() {
-        Path file = testResource.resolve("10-orders-performanceLoad-100K.txt");
-        orderBookHandler.handleOrders(file);
-    }
-
-    @Test
     @DisplayName("Only sell orders pending")
     void only_sell_orders_pending() {
         Path file = testResource.resolve("11-orders-noBuyPending.txt");
@@ -113,6 +99,34 @@ public class OrderBookHandlerTest {
         assertEquals(0, orderBook.getBids().size());
         assertEquals(0, orderBook.getAsks().size());
         assertTrue(orderBook.getTrades().size()>0);
+    }
+
+    @Test
+    @DisplayName("Performance load - 5K orders")
+    void performance_load_5K_orders() {
+        Path file = testResource.resolve("09-orders-performance5000.txt");
+        orderBookHandler.handleOrders(file);
+    }
+
+    @Test
+    @DisplayName("Performance load - 100K orders")
+    void performance_load_100K_orders() {
+        Path file = testResource.resolve("10-orders-performanceLoad-100K.txt");
+        orderBookHandler.handleOrders(file);
+    }
+
+    @Test
+    @DisplayName("Performance load - 600K orders")
+    void performance_load_600K_orders() {
+        Path file = testResource.resolve("15-orders-performanceLoad-600K.txt");
+        orderBookHandler.handleOrders(file);
+    }
+
+    @Test
+    @DisplayName("Performance load - 1 million orders")
+    void performance_load_1M_orders() {
+        Path file = testResource.resolve("00-orders-performanceLoad-1M.txt");
+        orderBookHandler.handleOrders(file);
     }
 
     // Test invalid file data for validator... validator test .java  IllegalArgumentException?

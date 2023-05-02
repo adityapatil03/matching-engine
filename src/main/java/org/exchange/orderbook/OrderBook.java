@@ -11,7 +11,7 @@ public interface OrderBook {
 
     void matchAndProcess(Order inOrder, boolean async);
 
-    void broadcastTrade(Trade trade);
+    void broadcastTrade(Trade trade, boolean async);
 
     void presentOrderBookStatus();
 
